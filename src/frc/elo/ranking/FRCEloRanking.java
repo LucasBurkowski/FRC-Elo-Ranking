@@ -18,8 +18,8 @@ public class FRCEloRanking {
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
-        Team[] teamList = TBA.getEventTeams("2018week0");
-        Match[] matchList = TBA.getEventMatches("2018week0");
+        Team[] teamList = TBA.getEventTeams("2016miann");
+        Match[] matchList = TBA.getEventMatches("2016miann");
         
         for (Match matchList1 : matchList) {
             Alliance blue = new Alliance();
