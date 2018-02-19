@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,6 +13,7 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import java.util.HashMap;
 /**
  *
@@ -60,7 +62,7 @@ public class TBA {
         Team[] teamlist = new Team[teams.size()];
         for(int i = 0; i < teams.size(); i++){
             HashMap hash = (HashMap) teams.get(i);
-            teamlist[i] = new Team((long) hash.get("team_number"), 2500);
+            teamlist[i] = new Team((String) hash.get("key"), 2500);
         }
         return teamlist;
     }
@@ -71,6 +73,18 @@ public class TBA {
         for(int i = 0; i < matches.size(); i++){
             HashMap hash = (HashMap) matches.get(i);
             
+            JSONObject alliances = (JSONObject) hash.get("alliances");
+            JSONObject blueTeam = (JSONObject) alliances.get("blue");
+            JSONObject redTeam = (JSONObject) alliances.get("red");
+            
+            String[] blueTeamTokens = blueTeam.get("team_keys").toString().replace("\"", "").replace("[", "").replace("]", "").split(",");
+            String[] redTeamTokens = redTeam.get("team_keys").toString().replace("\"", "").replace("[", "").replace("]", "").split(",");
+            
+            long blueScore = (long) blueTeam.get("score");
+            long redScore = (long) redTeam.get("score");
+            
+            matchResults[i] = new Match(blueTeamTokens, redTeamTokens, blueScore, redScore);
+                
         }
         return matchResults;
     }

@@ -13,7 +13,7 @@ public class Alliance {
     public Team team1;
     public Team team2;
     public Team team3;
-    public int matchScore;
+    public long matchScore;
     
     public Alliance(Team team1, Team team2, Team team3, int matchScore){
         this.team1 = team1;
@@ -22,6 +22,9 @@ public class Alliance {
         this.matchScore = matchScore;
     }
     
+    public Alliance(){
+        
+    }
     public double getRank(){
         return (team1.rank + team2.rank + team3.rank);
     }
